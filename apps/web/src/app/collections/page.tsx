@@ -10,6 +10,7 @@ import ProductGrid from '../../components/shop/ProductGrid'
 import AIStylistCard from '../../components/shop/AIStylistCard'
 import { ALL_PRODUCTS, COLLECTIONS } from '../../lib/mock-data'
 import { cn } from '../../lib/utils'
+import Footer from '@/src/components/layout/Footer'
 
 const SORT_OPTIONS = ['New In', 'Price: Low to High', 'Price: High to Low', 'Featured']
 
@@ -175,6 +176,7 @@ export default function CollectionsPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
