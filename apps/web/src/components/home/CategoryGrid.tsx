@@ -47,7 +47,7 @@ export default function CategoryGrid() {
             href={cat.href}
             className={`relative block aspect-square overflow-hidden group ${cat.bg}`}
           >
-            <Image src={cat.image} alt={cat.label} fill className="object-cover object-top group-hover:scale-110 transition-transform duration-700" />
+            <Image src={cat.image} alt={cat.label} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover object-top group-hover:scale-110 transition-transform duration-700" />
             <div className="absolute inset-0 flex items-end justify-start p-6
                             bg-gradient-to-t from-velore-black/60 via-velore-black/20 to-transparent" />
 

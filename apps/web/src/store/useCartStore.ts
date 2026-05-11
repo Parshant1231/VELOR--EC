@@ -19,6 +19,8 @@ interface CartStore {
   count: () => number
 }
 
+export type { CartItem, CartStore }
+
 export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
