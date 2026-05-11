@@ -73,3 +73,95 @@ export const ALL_PRODUCTS: Product[] = [
 
 export const CATEGORIES = ['All', 'Women', 'Men', 'Accessories', 'Footwear']
 export const COLLECTIONS = ['Outerwear', 'Atelier', 'Essentials', 'Leather', 'Evening', 'Footwear', 'Future Classics']
+export interface Order {
+  id:           string
+  orderNumber:  string
+  status:       'CONFIRMED' | 'PROCESSED' | 'SHIPPED' | 'IN_TRANSIT' | 'DELIVERED' | 'CANCELLED'
+  total:        number
+  createdAt:    string
+  estimatedDelivery: string
+  items: {
+    name:     string
+    variant:  string
+    price:    number
+    quantity: number
+    image?:   string
+  }[]
+  tracking: {
+    label: string
+    date:  string
+    done:  boolean
+  }[]
+}
+
+export const MOCK_ORDERS: Order[] = [
+  {
+    id:          'ord_1',
+    orderNumber: 'VL92301',
+    status:      'IN_TRANSIT',
+    total:       2450,
+    createdAt:   'May 18, 2025',
+    estimatedDelivery: 'May 25, 2025',
+    items: [
+      { name: 'Lumière Carryall', variant: 'Black / One Size', price: 2450, quantity: 1 },
+    ],
+    tracking: [
+      { label: 'Confirmed',  date: 'May 18', done: true  },
+      { label: 'Processed',  date: 'May 19', done: true  },
+      { label: 'Shipped',    date: 'May 20', done: true  },
+      { label: 'In Transit', date: 'May 23', done: true  },
+      { label: 'Delivered',  date: '—',      done: false },
+    ],
+  },
+  {
+    id:          'ord_2',
+    orderNumber: 'VL88120',
+    status:      'DELIVERED',
+    total:       3670,
+    createdAt:   'Apr 10, 2025',
+    estimatedDelivery: 'Apr 16, 2025',
+    items: [
+      { name: 'Lune Blazer',       variant: 'Pearl White / XS', price: 1290, quantity: 1 },
+      { name: 'Noiré Leather Bag', variant: 'Obsidian Black',   price: 890,  quantity: 1 },
+      { name: 'Éclat Silk Dress',  variant: 'Midnight / S',     price: 1490, quantity: 1 },
+    ],
+    tracking: [
+      { label: 'Confirmed',  date: 'Apr 10', done: true },
+      { label: 'Processed',  date: 'Apr 11', done: true },
+      { label: 'Shipped',    date: 'Apr 12', done: true },
+      { label: 'In Transit', date: 'Apr 13', done: true },
+      { label: 'Delivered',  date: 'Apr 16', done: true },
+    ],
+  },
+  {
+    id:          'ord_3',
+    orderNumber: 'VL74503',
+    status:      'DELIVERED',
+    total:       1190,
+    createdAt:   'Mar 2, 2025',
+    estimatedDelivery: 'Mar 8, 2025',
+    items: [
+      { name: 'Sculpted Leather Boots', variant: 'Black / 39', price: 1190, quantity: 1 },
+    ],
+    tracking: [
+      { label: 'Confirmed',  date: 'Mar 2', done: true },
+      { label: 'Processed',  date: 'Mar 3', done: true },
+      { label: 'Shipped',    date: 'Mar 4', done: true },
+      { label: 'In Transit', date: 'Mar 5', done: true },
+      { label: 'Delivered',  date: 'Mar 8', done: true },
+    ],
+  },
+]
+
+export const MOCK_COLLECTIONS = [
+  { id: '1', label: 'Paris Edit',        count: 12 },
+  { id: '2', label: 'Winter Essentials', count: 8  },
+  { id: '3', label: 'Signature Bags',    count: 6  },
+  { id: '4', label: 'Evening Elegance',  count: 9  },
+]
+
+export const MOCK_INSIGHTS = [
+  { icon: 'arrivals', label: 'New arrivals match your style', count: 12 },
+  { icon: 'wishlist', label: 'Items in your wishlist',        count: 6  },
+  { icon: 'style',    label: 'Style recommendations',        sub: 'Updated daily' },
+]
