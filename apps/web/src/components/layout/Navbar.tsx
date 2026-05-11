@@ -5,6 +5,10 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Search, User, ShoppingBag, Menu, X } from 'lucide-react'
 import { cn } from '../../lib/utils'
+// Add these imports at top
+import { useCartStore } from '../../store/useCartStore'
+import { useWishlistStore } from '../../store/useWishlistStore'
+import { Heart } from 'lucide-react'
 
 const NAV_LINKS = [
   { label: 'New In',      href: '/new-in' },
@@ -18,7 +22,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled]   = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const cartCount = 0 // will wire to store later
+  const cartCount = useCartStore((s) => s.count())
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -81,6 +85,10 @@ export default function Navbar() {
             <Link href="/account"
               className="text-velore-gray-light hover:text-velore-white transition-colors duration-300">
               <User size={16} />
+            </Link>
+            <Link href="/wishlist"
+              className="relative text-velore-gray-light hover:text-velore-white transition-colors duration-300">
+              <Heart size={16} />
             </Link>
             <Link href="/cart" className="relative text-velore-gray-light hover:text-velore-white transition-colors duration-300">
               <ShoppingBag size={16} />

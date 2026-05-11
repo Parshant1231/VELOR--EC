@@ -30,7 +30,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       <Link href={`/products/${product.slug}`}>
         <div className="relative aspect-[3/4] overflow-hidden bg-velore-surface mb-3">
           {product.images && product.images[0] ? (
-            <Image src={product.images[0]} alt={product.name} fill className="object-cover object-center group-hover:scale-105 transition-transform duration-700" />
+            <Image src={product.images[0]} alt={product.name} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw" className="object-cover object-center group-hover:scale-105 transition-transform duration-700" />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center bg-velore-surface">
               <span className="font-serif text-6xl text-velore-border">{product.name[0]}</span>

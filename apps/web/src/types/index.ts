@@ -10,6 +10,7 @@ export interface Product {
   colors: { name: string; hex: string }[]
   featured?: boolean
   description?: string
+  stock?: number
 }
 
 export interface CartItem {

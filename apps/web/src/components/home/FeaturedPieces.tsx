@@ -16,8 +16,15 @@ const FEATURED_PRODUCTS: Product[] = [
   { id: '5', name: 'Obsidian Tailored Coat',  slug: 'obsidian-tailored-coat',  price: 2890, images: ['/images/products/obsidian-tailored-coat.png'], category: 'men', sizes: ['S','M','L','XL'], colors: [{ name: 'Obsidian', hex: '#1C1C1C' }] },
 ]
 
-export default function FeaturedPieces() {
+interface FeaturedPiecesProps {
+  excludeSlug?: string
+}
+
+export default function FeaturedPieces({ excludeSlug }: FeaturedPiecesProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const displayProducts = excludeSlug 
+    ? FEATURED_PRODUCTS.filter(p => p.slug !== excludeSlug)
+    : FEATURED_PRODUCTS
 
   const scroll = (dir: 'left' | 'right') => {
     if (!scrollRef.current) return
@@ -87,7 +94,7 @@ export default function FeaturedPieces() {
         className="flex gap-5 overflow-x-auto pb-2 scrollbar-hide snap-x snap-mandatory"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        {FEATURED_PRODUCTS.map((product, i) => (
+        {displayProducts.map((product, i) => (
           <div
             key={product.id}
             className="flex-shrink-0 w-56 md:w-64 snap-start"
