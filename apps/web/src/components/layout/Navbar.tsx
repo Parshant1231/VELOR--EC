@@ -9,6 +9,8 @@ import { cn } from '../../lib/utils'
 import { useCartStore } from '../../store/useCartStore'
 import { useWishlistStore } from '../../store/useWishlistStore'
 import { Heart } from 'lucide-react'
+import AuthModal from '../auth/AuthModal'
+import { useAuthStore } from '../../store/useAuthStore'
 
 const NAV_LINKS = [
   { label: 'New In',      href: '/new-in' },
@@ -22,7 +24,9 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled, setScrolled]   = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [authOpen, setAuthOpen] = useState(false)
   const cartCount = useCartStore((s) => s.count())
+  const { user } = useAuthStore()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -82,10 +86,19 @@ export default function Navbar() {
             <button className="text-velore-gray-light hover:text-velore-white transition-colors duration-300">
               <Search size={16} />
             </button>
-            <Link href="/account"
-              className="text-velore-gray-light hover:text-velore-white transition-colors duration-300">
-              <User size={16} />
-            </Link>
+            {user ? (
+              <Link href="/account"
+                className="text-velore-gray-light hover:text-velore-white transition-colors duration-300">
+                <User size={16} />
+              </Link>
+            ) : (
+              <button
+                onClick={() => setAuthOpen(true)}
+                className="text-velore-gray-light hover:text-velore-white transition-colors duration-300"
+              >
+                <User size={16} />
+              </button>
+            )}
             <Link href="/wishlist"
               className="relative text-velore-gray-light hover:text-velore-white transition-colors duration-300">
               <Heart size={16} />
@@ -174,6 +187,8 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
+
+      <AuthModal isOpen={authOpen} onClose={() => setAuthOpen(false)} />
     </>
   )
 }
