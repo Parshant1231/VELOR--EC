@@ -1,23 +1,6 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import localFont from 'next/font/local'
+import { inter, cormorantGaramond } from '@/src/fonts/fonts'
 import './globals.css'
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-// Cormorant Garamond via Google Fonts
-import { Cormorant_Garamond } from 'next/font/google'
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  variable: '--font-cormorant',
-  weight: ['300', '400', '500', '600', '700'],
-  style: ['normal', 'italic'],
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: 'VELORÉ — Engineered Elegance.',
@@ -31,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${cormorant.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${cormorantGaramond.variable}`}>
       <body className="bg-velore-black text-velore-white antialiased">
         {children}
       </body>

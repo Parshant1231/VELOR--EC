@@ -5,7 +5,7 @@ import morgan from 'morgan'
 import rateLimit from 'express-rate-limit'
 import { env } from './config/env'
 import { errorHandler } from './middleware/errorHandler'
-
+import { execSync } from 'child_process'
 // Routes
 import authRoutes     from './modules/auth/auth.routes'
 import productRoutes  from './modules/products/products.routes'
@@ -55,15 +55,30 @@ app.use((_, res) => {
 // ─── Error handler (must be last) ────────────────────────────
 app.use(errorHandler)
 
-// ─── Start ───────────────────────────────────────────────────
-app.listen(env.PORT, () => {
-  console.log(`
+async function bootstrap() {
+  // Run pending migrations in production
+  if (env.NODE_ENV === 'production') {
+    try {
+      console.log('Running database migrations...')
+      execSync('npx prisma migrate deploy', { stdio: 'inherit' })
+      console.log('Migrations complete.')
+    } catch (err) {
+      console.error('Migration failed:', err)
+      process.exit(1)
+    }
+  }
+
+  app.listen(env.PORT, () => {
+    console.log(`
   ╔══════════════════════════════════╗
   ║   VELORÉ API — Running          ║
   ║   Port: ${env.PORT}                     ║
   ║   Env:  ${env.NODE_ENV}             ║
   ╚══════════════════════════════════╝
-  `)
-})
+    `)
+  })
+}
+
+bootstrap()
 
 export default app

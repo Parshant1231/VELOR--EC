@@ -1,0 +1,6 @@
+# Temporary files during font download
+*.zip
+
+# Optional: Only include this if you don't want to track font files
+# (uncomment the line below to prevent font files from being committed)
+# *.woff2
